@@ -1,12 +1,244 @@
-/**
- * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
- */
-
-/* eslint-env node */
-
-'use strict';
-
 module.exports = {
-	extends: 'ckeditor5'
+	env: {
+		browser: true,
+		es2021: true,
+		node: true,
+	},
+	extends: [
+		"plugin:react/recommended",
+		"plugin:import/react",
+		"prettier",
+		"standard",
+	],
+	parser: "@typescript-eslint/parser",
+	parserOptions: {
+		ecmaFeatures: {
+			jsx: true,
+		},
+		ecmaVersion: 12,
+		sourceType: "module",
+		project: "tsconfig.json",
+		tsconfigRootDir: __dirname,
+		createDefaultProgram: "true",
+	},
+	plugins: [
+		"react",
+		"react-hooks",
+		"@typescript-eslint",
+		"@typescript-eslint/tslint",
+		"prefer-arrow",
+		"import",
+	],
+	globals: {
+		Weglot: true,
+		JSX: true,
+	},
+	settings: {
+		"import/parser": "babel-eslint",
+		"import/ignore": [
+			"node_modules",
+			"\\.(coffee|scss|css|less|hbs|svg|json)$",
+			"node_modules",
+		],
+		react: {
+			version: "detect",
+		},
+	},
+	rules: {
+		"react/react-in-jsx-scope": "off",
+		"react/no-deprecated": "off",
+		"import/prefer-default-export": "off",
+		"import/extensions": [
+			"error",
+			"never",
+			{
+				css: "always",
+				json: "always",
+			},
+		],
+		"no-console": "warn",
+		"react/forbid-prop-types": "off",
+		"no-unused-vars": "error",
+		"react/jsx-uses-vars": 1,
+		"react/jsx-uses-react": 1,
+		"object-curly-spacing": ["error", "always"],
+		"react/jsx-curly-brace-presence": [1, "never"],
+		"max-len": [2, 160],
+		semi: ["error", "always"],
+		indent: ["off"],
+		"no-mixed-operators": 0,
+		"react/no-unused-prop-types": 1,
+		"react/prop-types": 2,
+		"no-tabs": 0,
+		"no-use-before-define": "off",
+		"space-before-function-paren": "off",
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": [
+			"warn",
+			{
+				argsIgnorePattern: "_",
+				varsIgnorePattern: "_",
+				caughtErrorsIgnorePattern: "_",
+			},
+		],
+		"@typescript-eslint/consistent-type-definitions": "off",
+		"@typescript-eslint/no-use-before-define": ["error"],
+		"@typescript-eslint/explicit-member-accessibility": [
+			"off",
+			{
+				accessibility: "explicit",
+			},
+		],
+		"@typescript-eslint/indent": [
+			"warn",
+			4,
+			{
+				SwitchCase: 1,
+				CallExpression: {
+					arguments: "first",
+				},
+				FunctionDeclaration: {
+					parameters: "first",
+				},
+				FunctionExpression: {
+					parameters: "first",
+				},
+			},
+		],
+		"@typescript-eslint/naming-convention": [
+			"error",
+			{
+				selector: "variableLike",
+				format: ["camelCase", "UPPER_CASE", "PascalCase", "snake_case"],
+				filter: {
+					regex: "__",
+					match: false,
+				},
+			},
+			{
+				selector: "variable",
+				format: ["camelCase", "UPPER_CASE", "PascalCase", "snake_case"],
+				filter: {
+					regex: "__",
+					match: false,
+				},
+				leadingUnderscore: "allow",
+			},
+			{
+				selector: "parameter",
+				format: ["camelCase", "PascalCase", "snake_case"],
+				leadingUnderscore: "allow",
+			},
+			{
+				selector: "property",
+				format: ["camelCase", "snake_case"],
+				modifiers: ["private"],
+				leadingUnderscore: "require",
+			},
+			{
+				selector: "method",
+				format: ["camelCase", "snake_case"],
+				leadingUnderscore: "allow",
+			},
+			{
+				selector: "parameterProperty",
+				format: ["camelCase", "snake_case"],
+				modifiers: ["private", "protected", "public", "readonly"],
+				leadingUnderscore: "require",
+			},
+			{
+				selector: "memberLike",
+				modifiers: ["private", "protected"],
+				format: ["camelCase", "snake_case"],
+				leadingUnderscore: "require",
+			},
+			{
+				selector: "typeLike",
+				format: ["PascalCase", "snake_case"],
+			},
+			{
+				selector: "typeParameter",
+				format: ["PascalCase", "snake_case"],
+				prefix: ["T"],
+			},
+			{
+				selector: "typeAlias",
+				format: ["PascalCase", "snake_case"],
+				prefix: ["T"],
+			},
+			{
+				selector: "interface",
+				format: ["PascalCase", "snake_case"],
+				prefix: ["I"],
+				filter: {
+					regex: "^(Window)",
+					match: false,
+				},
+			},
+		],
+		"@typescript-eslint/member-delimiter-style": [
+			"error",
+			{
+				multiline: {
+					delimiter: "semi",
+					requireLast: true,
+				},
+				singleline: {
+					delimiter: "semi",
+					requireLast: true,
+				},
+			},
+		],
+		"@typescript-eslint/member-ordering": [
+			"error",
+			{
+				default: [
+					"signature",
+					"public-instance-field",
+					"protected-instance-field",
+					"private-instance-field",
+					"public-abstract-field",
+					"protected-abstract-field",
+					"private-abstract-field",
+					"public-field",
+					"protected-field",
+					"private-field",
+					"static-field",
+					"instance-field",
+					"abstract-field",
+					"field",
+					"public-static-field",
+					"protected-static-field",
+					"private-static-field",
+					"constructor",
+					"public-static-method",
+					"protected-static-method",
+					"private-static-method",
+					"public-instance-method",
+					"protected-instance-method",
+					"private-instance-method",
+					"public-abstract-method",
+					"protected-abstract-method",
+					"private-abstract-method",
+					"public-method",
+					"protected-method",
+					"private-method",
+					"static-method",
+					"instance-method",
+					"abstract-method",
+					"method",
+				],
+			},
+		],
+		"@typescript-eslint/no-empty-interface": "off",
+		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/no-inferrable-types": "error",
+		"@typescript-eslint/no-require-imports": "off",
+		"@typescript-eslint/no-this-alias": "error",
+		"@typescript-eslint/no-var-requires": "off",
+		"@typescript-eslint/quotes": ["error", "single"],
+		"@typescript-eslint/semi": ["error", "always"],
+		"no-null/no-null": "off",
+		"prefer-arrow/prefer-arrow-functions": "error",
+	},
 };
